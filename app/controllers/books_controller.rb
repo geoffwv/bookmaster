@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
   get '/books' do
+    binding.pry
     @books = Book.all 
     erb :'books/index'
   end
