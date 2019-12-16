@@ -1,9 +1,11 @@
 class BooksController < ApplicationController
 
   get '/books' do
-    binding.pry
-    @books = Book.all 
-    erb :'books/index'
+    if logged_in?
+      @user = current_user
+      @books = @user.books 
+      erb :'books/index'
+    end
   end
 
   get '/books/new' do
@@ -31,24 +33,35 @@ class BooksController < ApplicationController
   end
 
   get "/books/:id/edit" do
-    @users = User.all
-    @book = Book.find_by(id: params[:id])
-    erb :'/books/edit'
+    user = Book.find_by(id: params[:id]).user
+    if user.id == current_user.id
+      @users = User.all
+      @book = user.books.find_by(id: params[:id])
+      erb :'/books/edit'
+    end
   end
 
   patch "/books/:id" do
-    @book = Book.find_by(params[:id])
-    if @book.update(title: params[:title], author: params[:author], body: params[:body])
-      redirect "/books/#{@book.id}"
+    user = Book.find_by(id: params[:id])
+    if user.id == current_user.id
+      @book = user.books.find_by(id: params[:id])
+      if @book.update(title: params[:title], author: params[:author], publisher: params[:publisher], genre: params[:genre])
+        redirect "/books/#{@book.id}"
+      else
+        redirect "/books/#{@book.ed}/edit"
+      end
     else
-      redirect "/books/#{@book.ed}/edit"
+      redirect "/books"
     end
   end
 
   delete "/books/:id" do
-    @book = Book.find_by(id: params[:id])
-    @book.delete
-    redirect"/books"
+    user = Book.find_by(id: params[:id])
+    if user.id == current_user.id
+      @book = Book.find_by(id: params[:id])
+      @book.delete
+      redirect"/books"
+    end
   end
 
 end
