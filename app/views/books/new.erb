@@ -1,13 +1,7 @@
 <h1>Add a new book to your collection!</h1>
 
 <form method="POST" action="/books">
-  <label>Select User:</label>
-  <select name="user_id">
-    <% @users.each do |user|%>
-      <option value="<%= user.id %>"><%= user.name %></option>
-    <% end %>
-  </select>
-  <br>
+  
 <label>Title:</label>
 <input type="text" name="title">
 <br>

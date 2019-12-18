@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   post "/login" do
     user = User.find_by(email: params[:email])
-    if user && user.authenicate(params[:password])
+    if user && user.authenticate(params[:password])
       session["user_id"] = user.id
       redirect "/books"
     else
