@@ -2,7 +2,7 @@
 
 <h3>Titles</h3>
 <% @books.each do |book| %>
-  <p><a href="/books/show<%= book.id %>"><%= book.title %></a></p>
+  <p><a href="/books/<%= book.id %>"><%= book.title %></a></p>
 <% end %>
 
 

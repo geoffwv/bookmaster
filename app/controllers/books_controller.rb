@@ -19,7 +19,7 @@ class BooksController < ApplicationController
       user = current_user
       book = user.books.build(params)
       if book.save
-        redirect "/books/:id"
+        redirect "/books/#{book.id}"
       else
         redirect "/books/new"
       end
@@ -54,29 +54,26 @@ class BooksController < ApplicationController
 
   patch "/books/:id" do
     if logged_in?
-      @book = current_user.books.find_by(id: params[:id])
-      if @book
-        if @book.update(title: params[:title], author: params[:author], publisher: params[:publisher], genre: params[:genre])
-          redirect "/books/#{@book.id}"
-        else
-          redirect "/books/#{@book.ed}/edit"
-        end
+      book = current_user.books.find_by(id: params[:id])
+      if book.update(title: params[:title], author: params[:author], publisher: params[:publisher], genre: params[:genre])
+        redirect "/books/#{book.id}"
       else
-        redirect "/books"
+        redirect "/books/#{book.ed}/edit"
       end
+    else
+      redirect "/"
     end
   end
 
   delete "/books/:id" do
-    # user = Book.find_by(id: params[:id])
     if logged_in?
-      user = current_user
-      book = user.books
-      if user == current_user
-        @book = current_user
-        @book.delete
-        redirect"/books"
+      book = current_user.books.find_by(id: params[:id])
+      if book
+        book.delete
       end
+      redirect "/books"
+    else
+      redirect "/"
     end
   end
 
