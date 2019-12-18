@@ -5,12 +5,14 @@
 <p>Genre:  <%= @book.genre %></p>
 
 <form method="GET" action="/books/<%= @book.id %>/edit">
-  <input type="submit" value="Edit"> 
+  <input type="submit" value="Edit this book"> 
 </form>
-<form method="GET" action="/books">
-  <input type="submit" value="Book list"> 
-</form>
+
 <form method="POST" action="/books/<%= @book.id %>">
   <input type="hidden" id="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete"> 
+  <input type="submit" value="Delete this book from your collection"> 
+</form>
+
+<form method="GET" action="/books">
+  <input type="submit" value="Back to your list"> 
 </form>

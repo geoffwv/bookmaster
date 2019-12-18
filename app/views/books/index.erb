@@ -1,6 +1,7 @@
 <h1>My book list</h1>
 
-<h3>Titles</h3>
+<h3><u>Titles</u></h3>
+<p>Select a title to edit or delete it from your list:</p>
 <% @books.each do |book| %>
   <p><a href="/books/<%= book.id %>"><%= book.title %></a></p>
 <% end %>
@@ -10,7 +11,7 @@
   <form method="GET" action="/books/new">
     <input type="submit" value="Add a new book to your collection">
   </form>
-  <form method="GET" action="/books/edit">
-    <input type="submit" value="Edit a book in your existing collection">
+  <form method="GET" action="/logout">
+    <input type="submit" value="Logout">
   </form>
 </div>
