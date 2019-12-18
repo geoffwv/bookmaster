@@ -1,5 +1,16 @@
-<h1>Book List</h1>
+<h1>My book list</h1>
 
+<h3>Titles</h3>
 <% @books.each do |book| %>
-  <p><a href="/books/<%= book.id %>"><%= book.title %></a></p>
+  <p><a href="/books/show<%= book.id %>"><%= book.title %></a></p>
 <% end %>
+
+
+<div class="content">
+  <form method="GET" action="/books/new">
+    <input type="submit" value="Add a new book to your collection">
+  </form>
+  <form method="GET" action="/books/edit">
+    <input type="submit" value="Edit a book in your existing collection">
+  </form>
+</div>
