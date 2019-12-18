@@ -31,7 +31,7 @@ class BooksController < ApplicationController
     # @book = Book.find_by(id: params[:id])
     if logged_in?
       user = current_user
-      book = user.books  
+      # book = user.books  
       # book = user.books.build(params)
       if @book
         erb :'books/show'
@@ -44,7 +44,7 @@ class BooksController < ApplicationController
   get "/books/:id/edit" do
     if logged_in?
       user = current_user
-      book = user.books
+      # book = user.books
       # user = Book.find_by(id: params[:id]).user
       if user == current_user
         @users = User.all
