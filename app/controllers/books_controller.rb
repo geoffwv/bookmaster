@@ -5,13 +5,17 @@ class BooksController < ApplicationController
       @user = current_user
       @books = @user.books 
       erb :'books/index'
-      
+    else
+      redirect "/"
     end
   end
 
   get '/books/new' do
-    #add if logged in
-    erb :'/books/new'
+    if logged_in?
+      erb :'/books/new'
+    else
+      redirect "/"
+    end
   end
 
   post '/books' do
